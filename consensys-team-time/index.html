@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consensys Team Time</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            height: 150px;
+            width: 100%;
+            overflow: hidden;
+        }
+        .clock-container {
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+        .clock-card {
+            padding: 5px;
+            border-radius: 5px;
+            width: 350px; /* Adjusted width */
+            height: 100%;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center; /* Center the content */
+            border: none;
+            box-shadow: none;
+        }
+        .title {
+            font-size: 1rem;
+            color: #f2420c;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: center;
+            width: 100%; /* Ensure title is centered */
+        }
+        .time-display {
+            font-size: 1.5rem;
+            color: #0038ff;
+            font-family: 'DM Sans', sans-serif;
+            margin-bottom: 5px;
+            text-align: center;
+            width: 100%; /* Ensure clock is centered */
+        }
+        select {
+            background-color: #c1ff14;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            width: 100%; /* Full width */
+            box-sizing: border-box;
+            font-size: 0.85rem;
+            font-family: 'DM Sans', sans-serif;
+            text-align: center; /* Center text in dropdown */
+        }
+        option {
+            text-align: center; /* Ensure options are centered */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+    This code is licensed under the MIT License.
+    For more information, see the LICENSE file in the repository.
+
+    This code is inspired by the website: https://fiveoclocksomewhere.eth.limo/
+    Original design and concept by the ConsenSys Team.
+    -->
+
+    <div class="clock-container" id="clockContainer">
+        <!-- Clock cards will be added here dynamically -->
+    </div>
+
+    <script>
+        const timezones = [
+            { label: 'UTC', value: 'UTC', name: 'Coordinated Universal Time' },
+            { label: 'Pacific/Honolulu', value: 'Pacific/Honolulu', name: 'Hawaii' },
+            { label: 'America/Los_Angeles', value: 'America/Los_Angeles', name: 'US Pacific Time' },
+            { label: 'America/Denver', value: 'America/Denver', name: 'US Mountain Time' },
+            { label: 'America/Chicago', value: 'America/Chicago', name: 'US Central Time' },
+            { label: 'America/New_York', value: 'America/New_York', name: 'US Eastern Time (New York)' },
+            { label: 'America/St_Johns', value: 'America/St_Johns', name: 'Newfoundland, CA' },
+            { label: 'America/Sao_Paulo', value: 'America/Sao_Paulo', name: 'São Paulo, Brazil' },
+            { label: 'America/Rio_Branco', value: 'America/Rio_Branco', name: 'Rio Branco, Brazil' },
+            { label: 'America/Fortaleza', value: 'America/Fortaleza', name: 'Fortaleza, Brazil' },
+            { label: 'America/Santiago', value: 'America/Santiago', name: 'Santiago, Chile' },
+            { label: 'America/Mexico_City', value: 'America/Mexico_City', name: 'Mexico City, Mexico' },
+            { label: 'America/Cancun', value: 'America/Cancun', name: 'Cancun, Mexico' },
+            { label: 'America/Monterrey', value: 'America/Monterrey', name: 'Monterrey, Mexico' },
+            { label: 'Europe/Dublin', value: 'Europe/Dublin', name: 'Ireland' },
+            { label: 'Europe/London', value: 'Europe/London', name: 'London' },
+            { label: 'Europe/Lisbon', value: 'Europe/Lisbon', name: 'Portugal' },
+            { label: 'Europe/Madrid', value: 'Europe/Madrid', name: 'Madrid, Spain' },
+            { label: 'CET', value: 'CET', name: 'Central European Time (CET)' },
+            { label: 'EET', value: 'EET', name: 'Eastern European Time (EET)' },
+            { label: 'Asia/Jerusalem', value: 'Asia/Jerusalem', name: 'Israel' },
+            { label: 'Europe/Malta', value: 'Europe/Malta', name: 'Malta' },
+            { label: 'Asia/Dubai', value: 'Asia/Dubai', name: 'Dubai' },
+            { label: 'Asia/Kolkata', value: 'Asia/Kolkata', name: 'India (Kolkata)' },
+            { label: 'Australia/Sydney', value: 'Australia/Sydney', name: 'Sydney, Australia' },
+            { label: 'Australia/Melbourne', value: 'Australia/Melbourne', name: 'Melbourne, Australia' },
+            { label: 'Australia/Brisbane', value: 'Australia/Brisbane', name: 'Brisbane, Australia' },
+            { label: 'Australia/Adelaide', value: 'Australia/Adelaide', name: 'Adelaide, Australia' },
+            { label: 'Australia/Perth', value: 'Australia/Perth', name: 'Perth, Australia' },
+            { label: 'Australia/Hobart', value: 'Australia/Hobart', name: 'Hobart, Australia' }
+        ];
+
+        function updateTime(clockElement, timezone) {
+            const date = new Date();
+            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: timezone };
+            const timeString = date.toLocaleTimeString([], options);
+            clockElement.innerText = timeString;
+        }
+
+        function addClock(timezone = 'UTC') {
+            const clockContainer = document.getElementById('clockContainer');
+
+            const clockCard = document.createElement('div');
+            clockCard.className = 'clock-card';
+
+            const title = document.createElement('div');
+            title.className = 'title';
+            title.innerText = 'Consensys Team Time';
+            clockCard.appendChild(title);
+
+            const timeDisplay = document.createElement('div');
+            timeDisplay.className = 'time-display';
+            timeDisplay.innerText = 'Loading...';
+            clockCard.appendChild(timeDisplay);
+
+            const timeZoneSelector = document.createElement('select');
+            timezones.forEach(tz => {
+                const option = document.createElement('option');
+                option.value = tz.value;
+                option.innerText = `${tz.label} (${tz.name})`;
+                timeZoneSelector.appendChild(option);
+            });
+            timeZoneSelector.value = timezone;
+            clockCard.appendChild(timeZoneSelector);
+
+            clockContainer.appendChild(clockCard);
+
+            setInterval(() => updateTime(timeDisplay, timeZoneSelector.value), 1000);
+            updateTime(timeDisplay, timezone);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            addClock();
+        });
+    </script>
+</body>
+</html>
