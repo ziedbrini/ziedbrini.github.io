@@ -14,7 +14,7 @@
             align-items: center;
             justify-content: center;
             background-color: transparent;
-            height: 150px; /* Adjusted height to accommodate the title */
+            height: 150px;
             width: 100%;
             overflow: hidden;
         }
@@ -25,14 +25,14 @@
             width: 100%;
         }
         .clock-card {
-            padding: 10px;
+            padding: 5px; /* Reduced padding */
             border-radius: 5px;
             width: 250px;
             height: 100%;
             background-color: transparent;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start; /* Adjusted to reduce gap */
             align-items: flex-start;
             border: none;
             box-shadow: none;
@@ -42,21 +42,24 @@
             color: #f2420c;
             font-family: 'DM Sans', sans-serif;
             font-weight: bold;
-            margin-bottom: 5px; /* Spacing below the title */
+            margin-bottom: 3px; /* Reduced gap */
             width: 100%;
-            text-align: left; /* Align title to the left */
+            text-align: left;
         }
         .time-display {
-            font-size: 1rem;
+            font-size: 1.5rem; /* Increased font size */
             color: #0038ff;
             font-family: 'DM Sans', sans-serif;
+            margin-bottom: 3px; /* Reduced gap */
+            width: 100%;
+            text-align: left;
         }
         select {
             background-color: #c1ff14;
             border: none;
-            padding: 5px 10px;
+            padding: 5px 15px; /* Increased padding for width */
             border-radius: 3px;
-            width: 100%;
+            width: calc(100% + 15px); /* Expand to the right */
             box-sizing: border-box;
             font-size: 0.85rem;
             font-family: 'DM Sans', sans-serif;
