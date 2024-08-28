@@ -140,5 +140,23 @@
 
             const timeZoneSelector = document.createElement('select');
             timezones.forEach(tz => {
-                const option = document.createE
+                const option = document.createElement('option');
+                option.value = tz.value;
+                option.innerText = `${tz.label} (${tz.name})`;
+                timeZoneSelector.appendChild(option);
+            });
+            timeZoneSelector.value = timezone;
+            clockCard.appendChild(timeZoneSelector);
 
+            clockContainer.appendChild(clockCard);
+
+            setInterval(() => updateTime(timeDisplay, timeZoneSelector.value), 1000);
+            updateTime(timeDisplay, timezone);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            addClock();
+        });
+    </script>
+</body>
+</html>
