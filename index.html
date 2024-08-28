@@ -25,15 +25,15 @@
             width: 100%;
         }
         .clock-card {
-            padding: 5px; /* Reduced padding */
+            padding: 5px;
             border-radius: 5px;
-            width: 250px;
+            width: 350px; /* Adjusted width */
             height: 100%;
             background-color: transparent;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Adjusted to reduce gap */
-            align-items: flex-start;
+            justify-content: flex-start;
+            align-items: center; /* Center the content */
             border: none;
             box-shadow: none;
         }
@@ -42,24 +42,24 @@
             color: #f2420c;
             font-family: 'DM Sans', sans-serif;
             font-weight: bold;
-            margin-bottom: 3px; /* Reduced gap */
-            width: 100%;
-            text-align: left;
+            margin-bottom: 5px;
+            text-align: center;
+            width: 100%; /* Ensure title is centered */
         }
         .time-display {
-            font-size: 1.5rem; /* Increased font size */
+            font-size: 1.5rem;
             color: #0038ff;
             font-family: 'DM Sans', sans-serif;
-            margin-bottom: 3px; /* Reduced gap */
-            width: 100%;
-            text-align: left;
+            margin-bottom: 5px;
+            text-align: center;
+            width: 100%; /* Ensure clock is centered */
         }
         select {
             background-color: #c1ff14;
             border: none;
-            padding: 5px 15px; /* Increased padding for width */
+            padding: 5px 10px;
             border-radius: 3px;
-            width: calc(100% + 15px); /* Expand to the right */
+            width: 100%; /* Full width */
             box-sizing: border-box;
             font-size: 0.85rem;
             font-family: 'DM Sans', sans-serif;
@@ -140,23 +140,5 @@
 
             const timeZoneSelector = document.createElement('select');
             timezones.forEach(tz => {
-                const option = document.createElement('option');
-                option.value = tz.value;
-                option.innerText = `${tz.label} (${tz.name})`;
-                timeZoneSelector.appendChild(option);
-            });
-            timeZoneSelector.value = timezone;
-            clockCard.appendChild(timeZoneSelector);
+                const option = document.createE
 
-            clockContainer.appendChild(clockCard);
-
-            setInterval(() => updateTime(timeDisplay, timeZoneSelector.value), 1000);
-            updateTime(timeDisplay, timezone);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            addClock();
-        });
-    </script>
-</body>
-</html>
