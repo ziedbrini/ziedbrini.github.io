@@ -29,12 +29,12 @@
             border-radius: 5px;
             width: 300px;
             height: 100%;
-            text-align: center;
+            text-align: left; /* Changed from center to left */
             background-color: transparent; /* Transparent background */
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            align-items: center;
+            align-items: flex-start; /* Changed from center to flex-start */
             border: none; /* Remove border */
             box-shadow: none; /* Remove shadow */
         }
@@ -42,11 +42,15 @@
             font-size: 1.2rem;
             color: #0038ff;
             font-family: 'DM Sans', sans-serif;
+            /* Optional: Ensure text is left-aligned within the div */
+            width: 100%;
         }
         .timezone-name {
             font-size: 0.75rem;
             color: #0038ff;
             font-family: 'DM Sans', sans-serif;
+            /* Optional: Ensure text is left-aligned within the div */
+            width: 100%;
         }
         select {
             background-color: #c1ff14;
